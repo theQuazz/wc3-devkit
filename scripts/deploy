@@ -32,9 +32,7 @@ if [ $? != 0 ]; then
   exit
 fi
 
-echo "Deploying to $host"
-
 echo "Copying $output to $dest"
-scp "$output" $host:$dest
+scp "$output" $dest
 echo "Copied!"
 exit
