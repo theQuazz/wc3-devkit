@@ -1,0 +1,40 @@
+#!/bin/sh
+
+
+if [ "$1" = "--help" ]; then
+  echo "deploy [output_map_name [output_map_cfg_name [output_map_env]]]"
+  echo "defaults:"
+  echo " - output_map_name           itt_pro.w3x"
+  echo " - output_map_cfg_name       \${output_map_name}.cfg"
+  echo " - output_map_env            pro"
+  exit
+fi
+
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd ..
+
+output="${1:-pro_map.w3x}"
+cfg="${2:-${output}.cfg}"
+env="${3:-pro}"
+dest="${4:-user@someserver.com:/path/to/maps/folder}"
+
+echo "Preparing to build $output"
+
+if [ -f "$output" ]; then
+  echo "Removing old ($output) files"
+  rm "$output"*
+fi
+
+echo "Building $output in $env environment"
+./scripts/build env:$env map_output_path:"$output" $@
+
+if [ $? != 0 ]; then
+  exit
+fi
+
+echo "Deploying to $host"
+
+echo "Copying $output to $dest"
+scp "$output" $host:$dest
+echo "Copied!"
+exit

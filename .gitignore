@@ -1,0 +1,14 @@
+backups/
+logs/
+tmp*
+/*.j
+/*.w3x
+*widgetizer/Output/*
+compiled-maps/*
+markdown_changelog.md
+.windows-serial
+emails.txt
+bugs.txt
+*.sublime-*
+tools/widgetizer/Output/
+.*.un~
