@@ -235,7 +235,7 @@ puts 'loading helpers...' if opt[:debug]
 load_all_helpers
 puts 'loaded helpers...' if opt[:debug]
 
-itt_builder.extract_globals 'src/lib/ID.j'
+itt_builder.extract_globals 'src/lib/ID.zn'
 
 opt[:build_order].each do |f|
   itt_builder.add "src/#{f}"
